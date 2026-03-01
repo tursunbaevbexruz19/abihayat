@@ -836,32 +836,56 @@
                     .then(responses => {
                         const isAnyOk = responses.some(r => r.ok);
                         if (isAnyOk) {
-                            alert('✅ So\'rovingiz muvaffaqiyatli qabul qilindi! Mutaxassislarimiz tez orada siz bilan bog\'lanadi.');
-                            e.target.reset();
-                            phoneInput.value = ''; // clear explicit logic
-                            hideModal();
+                            // Custom Success Animation on Button
+                            btn.innerHTML = '<i class="fas fa-check-circle"></i> Muvaffaqiyatli jo\'natildi!';
+                            btn.classList.replace('bg-emerald-600', 'bg-green-500');
+                            btn.classList.replace('hover:bg-emerald-700', 'hover:bg-green-600');
+
+                            setTimeout(() => {
+                                e.target.reset();
+                                phoneInput.value = ''; // clear explicit logic
+                                hideModal();
+                                // Restore original button state
+                                setTimeout(() => {
+                                    btn.innerHTML = originalHTML;
+                                    btn.disabled = false;
+                                    btn.classList.remove('opacity-70');
+                                    btn.classList.replace('bg-green-500', 'bg-emerald-600');
+                                    btn.classList.replace('hover:bg-green-600', 'hover:bg-emerald-700');
+                                }, 400); // Wait for modal fade out
+                            }, 2500); // Show success for 2.5 seconds before closing
                         } else {
-                            // Fetch promises resolve even on 4xx/5xx responses if network connects.
-                            // We throw to catch block if ALL requests failed with bad status.
-                            throw new Error("Telegram API error / Internet connection issue");
+                            throw new Error("Telegram API error");
                         }
                     })
                     .catch(err => {
                         console.error('Submission error:', err);
-                        // Make error message clear - this is what they were seeing
-                        alert('❌ Telegram bot ishlamayapti: Ehtimol botingizni "Start" qilmagansiz yoki chat_id ruxsatlari yo\'q! (400 Bad Request error) Yuqoridagi raqamga telefon qiling.');
-                    })
-                    .finally(() => {
-                        btn.innerHTML = originalHTML;
-                        btn.disabled = false;
-                        btn.classList.remove('opacity-70');
+                        // Custom Error Animation on Button
+                        btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Xatolik yuz berdi';
+                        btn.classList.replace('bg-emerald-600', 'bg-red-500');
+                        btn.classList.replace('hover:bg-emerald-700', 'hover:bg-red-600');
+
+                        setTimeout(() => {
+                            btn.innerHTML = originalHTML;
+                            btn.disabled = false;
+                            btn.classList.remove('opacity-70');
+                            btn.classList.replace('bg-red-500', 'bg-emerald-600');
+                            btn.classList.replace('hover:bg-red-600', 'hover:bg-emerald-700');
+                        }, 3000);
                     });
             } catch (err) {
                 console.error('Fatal fetch error:', err);
-                alert('❌ Xatolik yuz berdi. Iltimos tekshiring.');
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-                btn.classList.remove('opacity-70');
+                btn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Xatolik yuz berdi';
+                btn.classList.replace('bg-emerald-600', 'bg-red-500');
+                btn.classList.replace('hover:bg-emerald-700', 'hover:bg-red-600');
+
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-70');
+                    btn.classList.replace('bg-red-500', 'bg-emerald-600');
+                    btn.classList.replace('hover:bg-red-600', 'hover:bg-emerald-700');
+                }, 3000);
             }
         }
     </script>
