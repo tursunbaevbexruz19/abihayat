@@ -815,12 +815,14 @@
                     });
                 }))
                     .then(responses => {
-                        const isAllOk = responses.every(r => r.ok);
-                        if (isAllOk) {
+                        const isAnyOk = responses.some(r => r.ok);
+                        if (isAnyOk) {
                             alert('✅ So\'rovingiz muvaffaqiyatli qabul qilindi! Mutaxassislarimiz tez orada siz bilan bog\'lanadi.');
                             e.target.reset(); // clear the text inputs including phone text
                             hideModal();
                         } else {
+                            // If it failed for all of them, let's log the first error response for debugging
+                            responses[0].text().then(text => console.error("Telegram Error:", text));
                             throw new Error("Telegram API error / Internet connection issue");
                         }
                     })
