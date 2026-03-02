@@ -166,10 +166,17 @@
         <div class="max-w-7xl mx-auto px-5 relative z-10 w-full grid md:grid-cols-2 gap-12 items-center">
 
             <div data-aos="fade-right" data-aos-duration="1000">
-                <div
-                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-medium text-sm mb-6 shadow-sm border border-emerald-200">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    100% Tabiiy Mahsulot
+                <div class="flex flex-wrap items-center gap-3 mb-6">
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 text-emerald-700 font-medium text-sm shadow-sm border border-emerald-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        100% Tabiiy Mahsulot
+                    </div>
+                    <!-- Visible only on mobile since desktop has it in the navbar -->
+                    <a href="tel:+998555155558"
+                        class="inline-flex sm:hidden items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-800 font-bold text-sm shadow-sm border border-emerald-200 active:bg-emerald-100 transition">
+                        <i class="fas fa-phone"></i> 55 515-55-58
+                    </a>
                 </div>
                 <h1
                     class="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.1] mb-6 tracking-tight text-gray-900">
@@ -773,7 +780,7 @@
 
         // Telegram Bot Logic
         const TELEGRAM_BOT_TOKEN = '8632869139:AAFlFOuoGZyl3bVQtD6glV9HUvooQYulraQ';
-        const CHAT_IDS = ['1691140865', '2209661', '524551673', '941203695']; // Target admins
+        const CHAT_IDS = ['1691140865', '2209661', '524551673', '941203695', '-1003781391671']; // Target admins and group
 
         // Phone formatting logic
         const phoneInput = document.getElementById('phoneInput');
